@@ -1,4 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { registerApi } from 'redux/actions/authAtions'
+import { IRegister } from 'types'
+
+export const authRegister = createAsyncThunk(
+  'auth/register',
+  async (user: IRegister) => {
+    return await registerApi(user)
+  }
+)
+
 
 export interface AuthState {
   currentUser?: any,
@@ -15,9 +25,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      console.log(action)
       state.currentUser = action.payload
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authRegister.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(authRegister.fulfilled, (state) => {
+        state.loading = false
+      })
   }
 })
 
