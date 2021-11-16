@@ -9,3 +9,9 @@ export interface IRegister {
   password: string
   cf_password: string
 }
+
+export interface ILogin {
+  email: string
+  password: string
+  remember: boolean
+}

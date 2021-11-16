@@ -21,7 +21,6 @@ const PageRender = () => {
     name = id ? `${page}/[id]` : `${page}`
   }
 
-  console.log(name)
   return generatePage(name)
 }
 
