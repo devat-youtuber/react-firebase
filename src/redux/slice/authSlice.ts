@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { facebookApi, forgotPassApi, googleApi, loginApi, registerApi, signOutApi } from 'redux/actions/authAtions'
-import { ILogin, IRegister } from 'types'
+import { IAuth, ILogin, IRegister } from 'types'
 
 export const authRegister = createAsyncThunk(
   'auth/register',
@@ -46,7 +46,7 @@ export const authLogout = createAsyncThunk(
 
 
 export interface AuthState {
-  currentUser?: any,
+  currentUser?: IAuth,
   loading: boolean
 }
 
