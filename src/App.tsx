@@ -4,7 +4,7 @@ import { Switch, Route, useHistory } from 'react-router-dom'
 
 import PageRender from './PageRender'
 
-import { onAuthStateChanged, sendEmailVerification, signOut } from 'firebase/auth'
+import { onIdTokenChanged, sendEmailVerification, signOut } from 'firebase/auth'
 import { auth } from 'Firebase'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { addUser } from 'redux/slice/authSlice'
@@ -17,7 +17,7 @@ const App = () => {
   const history = useHistory()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
       if(user){
         const providerId = user.providerData.some(
           p => p.providerId === 'password'
