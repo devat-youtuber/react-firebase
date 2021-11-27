@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { changeProfile, getProfile } from 'redux/actions/profileActions'
+import { changeProfile, getProfile } from 'actions/profileActions'
 import { IAuth, IProfile } from 'types'
 
 export const profileUpdate = createAsyncThunk(

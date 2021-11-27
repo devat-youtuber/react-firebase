@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { facebookApi, forgotPassApi, googleApi, loginApi, registerApi, signOutApi } from 'redux/actions/authAtions'
+import { facebookApi, forgotPassApi, googleApi, loginApi, registerApi, signOutApi } from 'actions/authAtions'
 import { IAuth, ILogin, IRegister } from 'types'
 
 export const authRegister = createAsyncThunk(

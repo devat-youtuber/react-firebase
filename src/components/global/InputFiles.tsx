@@ -36,7 +36,7 @@ const InputFiles: React.FC<IProps> = ({multiple, files, setFiles}) => {
         return toast.error("The largest image size is 1mb.")
       }
 
-      newFiles.push(file)
+      return newFiles.push(file)
     })
 
     setFiles(newFiles)

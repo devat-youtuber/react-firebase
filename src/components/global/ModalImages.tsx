@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { getFiles } from 'redux/actions/uploadAction'
+import { getFiles } from 'actions/uploadAction'
 import { useAppSelector } from 'redux/hooks'
 
 interface IProps {

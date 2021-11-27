@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import InputFiles from 'components/global/InputFiles'
 
 import { useAppSelector } from 'redux/hooks'
-import { uploadFiles } from 'redux/actions/uploadAction'
-import { changeAvatar } from 'redux/actions/accountAction'
+import { uploadFiles } from 'actions/uploadAction'
+import { changeAvatar } from 'actions/accountAction'
 
 
 const Avatar = () => {
