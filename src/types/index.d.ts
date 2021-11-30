@@ -32,3 +32,11 @@ export interface IProfile {
   address: string
   about: string
 }
+
+export interface ICollection {
+  id?: string
+  uid?: string
+  title?: string
+  photos?: string[]
+  createdAt?: number
+}

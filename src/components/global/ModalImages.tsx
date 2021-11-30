@@ -7,10 +7,11 @@ interface IProps {
   open: boolean
   setOpen: (open: boolean) => void
   multiple?: boolean
+  files: (File | string)[]
   setFiles: (img: (File | string)[]) => void
 }
 
-const ModalImages: React.FC<IProps> = ({open, setOpen, multiple, setFiles}) => {
+const ModalImages: React.FC<IProps> = ({open, setOpen, multiple, files, setFiles}) => {
   const [store, setStore] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
@@ -48,8 +49,10 @@ const ModalImages: React.FC<IProps> = ({open, setOpen, multiple, setFiles}) => {
   }
 
   const handleSubmit = () => {
-    setFiles(imgSelect)
     setOpen(false)
+    if(!multiple) return setFiles(imgSelect);
+
+    return setFiles([...files, ...imgSelect])
   }
 
   return (
