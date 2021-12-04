@@ -9,6 +9,7 @@ import { auth } from 'Firebase'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { addUser } from 'redux/slice/authSlice'
 import { fetchProfile } from 'redux/slice/profileSlice'
+import { collectionFetchData } from 'redux/slice/collectionSlice'
 
 
 const App = () => {
@@ -40,8 +41,15 @@ const App = () => {
   },[dispatch, history])
 
   useEffect(() => {
-    if(currentUser?.uid) dispatch(fetchProfile(currentUser.uid))
+    if(!currentUser?.uid) return;
+    // Profile
+    dispatch(fetchProfile(currentUser.uid))
+    // Home
+    const payload = { uid: currentUser.uid }
+    dispatch(collectionFetchData(payload))
   },[currentUser, dispatch])
+
+ 
 
 
   return (
