@@ -1,4 +1,4 @@
-import { addDoc, collection, query, getDocs, where, doc, getDoc } from "firebase/firestore/lite"
+import { addDoc, collection, query, getDocs, where, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore/lite"
 import { toast } from "react-toastify"
 
 import { db } from 'Firebase'
@@ -17,6 +17,24 @@ export const createCollection = async (uid: string, title: string, photos: strin
 
     return { ...data, id: res.id }
     
+  } catch (err: any) {
+    return toast.error(err.message)
+  }
+}
+
+export const updateCollection = async (data: any) => {
+  try {
+    await updateDoc(doc(db, `collections/${data.id}`), data)
+    return toast.success("Update Success!")
+  } catch (err: any) {
+    return toast.error(err.message)
+  }
+}
+
+export const deleteCollection = async (data: any) => {
+  try {
+    await deleteDoc(doc(db, `collections/${data.id}`))
+    return toast.success("Delete Success!")
   } catch (err: any) {
     return toast.error(err.message)
   }

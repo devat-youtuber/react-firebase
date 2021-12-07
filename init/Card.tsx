@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 
 const Card = () => {
   return (
@@ -19,6 +20,11 @@ const Card = () => {
           title
         </h2>
         {/* children */}
+        <PencilAltIcon className="hidden mx-2 cursor-pointer hover:text-blue-500 w-7 text-opacity-80 group-hover:block" 
+        />
+
+        <TrashIcon className="hidden cursor-pointer hover:text-red-500 w-7 text-opacity-80 group-hover:block"
+        />
       </div>
   </div>
   )

@@ -31,6 +31,21 @@ const collectionSlice = createSlice({
   reducers: {
     create:( state, action) => {
       state.collections.unshift(action.payload)
+    },
+    update:( state, action) => {
+      const newData = state.collections.map(item => (
+        item.id === action.payload.id
+        ? action.payload
+        : item
+      ))
+      state.collections = newData
+    },
+    remove:( state, action) => {
+      const newData = state.collections.filter(item => (
+        item.id !== action.payload.id
+      ))
+
+      state.collections = newData
     }
   },
   extraReducers: (builder) => {
@@ -46,6 +61,6 @@ const collectionSlice = createSlice({
 })
 
 
-export const { create } = collectionSlice.actions
+export const { create, update, remove } = collectionSlice.actions
 
 export default collectionSlice.reducer

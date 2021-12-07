@@ -7,7 +7,7 @@ interface IProps {
   collection: ICollection
 }
 
-const Card: React.FC<IProps> = ({collection}) => {
+const Card: React.FC<IProps> = ({children, collection}) => {
   return (
     <div className="relative group">
       <div className="relative w-full overflow-hidden bg-white rounded-lg h-80 group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
@@ -23,7 +23,7 @@ const Card: React.FC<IProps> = ({collection}) => {
         <h2 className="text-2xl text-gray-900 capitalize">
           {collection.title}
         </h2>
-        {/* children */}
+        { children }
       </div>
   </div>
   )

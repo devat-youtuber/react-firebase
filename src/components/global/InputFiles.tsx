@@ -2,6 +2,8 @@ import React, { ChangeEvent, useState, DragEvent } from 'react'
 import { toast } from 'react-toastify'
 import ModalImages from './ModalImages'
 
+import { XCircleIcon } from '@heroicons/react/solid'
+
 
 interface IProps {
   multiple?: boolean
@@ -58,27 +60,37 @@ const InputFiles: React.FC<IProps> = ({multiple, files, setFiles}) => {
     checkImages(files)
   }
 
+  const removeImage = (i: number) => {
+    const newArr = files.filter((_, index) => index !== i)
+    setFiles(newArr)
+  }
+
   const showImage = (url: string, index: number) => {
     return (
       <div key={index} className='flex flex-col items-center'>
         <img src={url} 
         alt="avatar" className='object-cover w-12 h-12 mx-1 border rounded-full'/>
+        <XCircleIcon className='w-5 cursor-pointer'
+        onClick={() => removeImage(index)} />
       </div>
     )
   }
  
   return (
     <div className='w-full my-3'>
-      {
-        modal && 
-        <ModalImages 
-        open={modal} 
-        setOpen={setModal}
-        multiple={multiple}
-        files={files}
-        setFiles={setFiles}
-        />
-      }
+      <div>
+        {
+          modal && 
+          <ModalImages 
+          open={modal} 
+          setOpen={setModal}
+          multiple={multiple}
+          files={files}
+          setFiles={setFiles}
+          />
+        }
+      </div>
+      
       <div onDrop={drop} onDragOver={allowDrag}>
         <div className="flex justify-center px-6 pt-5 pb-6 mt-1 border-2 border-gray-200 border-dashed rounded-md">
           <div className="space-y-1 text-center">

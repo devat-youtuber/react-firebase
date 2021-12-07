@@ -1,9 +1,28 @@
-import { useAppSelector } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import Card from "components/global/Card";
 
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
+import { ICollection } from "types";
+import { remove } from "redux/slice/collectionSlice";
+import { deleteCollection } from "actions/collectionAction";
 
-const Collections = () => {
+
+interface IProps {
+  setDataEdit: (dataEdit?: ICollection) => void
+}
+
+const Collections: React.FC<IProps> = ({setDataEdit}) => {
   const { collections, loading } = useAppSelector(state => state.collections)
+  const dispatch = useAppDispatch()
+
+  const handleDelete = (data: ICollection) => {
+    if(!data.id) return;
+
+    if(window.confirm("Are you sure you want to delete this collection?")){
+      dispatch(remove(data))
+      deleteCollection(data)
+    }
+  }
  
   return (
     <div className="bg-gray-100">
@@ -15,7 +34,14 @@ const Collections = () => {
             {/* Card */}
             {
               collections.map(collection => (
-                <Card key={collection.id} collection={collection} />
+                <Card key={collection.id} collection={collection}>
+                  <PencilAltIcon className="hidden mx-2 cursor-pointer hover:text-blue-500 w-7 text-opacity-80 group-hover:block"
+                  onClick={() => setDataEdit(collection)} 
+                  />
+
+                  <TrashIcon className="hidden cursor-pointer hover:text-red-500 w-7 text-opacity-80 group-hover:block"
+                  onClick={() => handleDelete(collection)}/>
+                </Card>
               ))
             }
           </div>
