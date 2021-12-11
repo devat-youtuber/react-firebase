@@ -1,4 +1,4 @@
-import { addDoc, collection, query, getDocs, where, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore/lite"
+import { addDoc, collection, query, getDocs, where, doc, getDoc, updateDoc, deleteDoc, orderBy, OrderByDirection, limit, startAfter } from "firebase/firestore/lite"
 import { toast } from "react-toastify"
 
 import { db } from 'Firebase'
@@ -40,21 +40,39 @@ export const deleteCollection = async (data: any) => {
   }
 }
 
+export let lastestDoc: any = '';
 
-export const getCollections = async (uid: string) => {
+export const getCollections = async (uid: string, sort: string, doc: any) => {
   try {
     const data: ICollection[] = [];
+    const num = 3;
+    let q;
 
-    const q = query(
-      collection(db, "collections"),
-      where("uid", "==", uid)
-    )
+    if(doc){
+      q = query(
+        collection(db, "collections"),
+        where("uid", "==", uid),
+        orderBy("createdAt", (sort as OrderByDirection)),
+        startAfter(doc),
+        limit(num)
+      )
+    }else{
+      q = query(
+        collection(db, "collections"),
+        where("uid", "==", uid),
+        orderBy("createdAt", (sort as OrderByDirection)),
+        limit(num)
+      )
+    }
+    
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
       data.push({...doc.data(), id: doc.id})
     });
+
+    lastestDoc = querySnapshot.docs[querySnapshot.docs.length-1];
 
     return data;
   } catch (err: any) {

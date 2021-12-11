@@ -14,6 +14,7 @@ import { collectionFetchData } from 'redux/slice/collectionSlice'
 
 const App = () => {
   const { currentUser } = useAppSelector(state => state.auth)
+  const { sort, doc } = useAppSelector(state => state.collections)
   const dispatch = useAppDispatch()
   const history = useHistory()
 
@@ -42,14 +43,16 @@ const App = () => {
 
   useEffect(() => {
     if(!currentUser?.uid) return;
-    // Profile
     dispatch(fetchProfile(currentUser.uid))
-    // Home
-    const payload = { uid: currentUser.uid }
-    dispatch(collectionFetchData(payload))
   },[currentUser, dispatch])
 
- 
+
+  useEffect(() => {
+    if(!currentUser?.uid) return;
+    const payload = { uid: currentUser.uid, sort, doc }
+    dispatch(collectionFetchData(payload))
+  },[currentUser, dispatch, sort, doc])
+
 
 
   return (

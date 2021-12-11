@@ -12,7 +12,7 @@
 
 ## Author: Dev AT
 
-## Youtube tutorials: https://youtu.be/ntVG6169yFQ
+## Youtube tutorials: https://youtu.be/Ys32OPKvOKw
 
 
 ## Install dependencies for React
